@@ -5,6 +5,7 @@ module SimpleWorld where
 import           AsmRunner
 import           Data.Map  as Map
 import           Entities
+import Region
 
 -- run entire environment
 environmentF :: StepOrdering -> World -> Update World StepOrdering
@@ -12,7 +13,7 @@ environmentF i w = Update i id
 
 -- run single region
 regionF :: RegionId -> StepOrdering -> World -> Update World StepOrdering
-regionF rId i w = Update i id
+regionF rId i w = Update i (\w -> w {regions = insert rId newReg $ regions w} )
   where
     reg :: Region
     reg = regions w ! rId
@@ -127,3 +128,6 @@ worldT1 = World
   { regions = Map.fromList [(1,regionT1),(2,regionT2),(3,regionT3)]
   , nations = Map.fromList [(1,nationT1),(2,nationT2)]
   }
+
+worldStep :: World
+worldStep = step worldT1 ([] :: [ASM World StepOrdering])

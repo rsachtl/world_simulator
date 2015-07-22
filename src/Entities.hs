@@ -1,6 +1,7 @@
 module Entities where
 
 import           AsmRunner
+import Region
 import           Data.Map  as Map
 
 type RegionId = Int
@@ -28,14 +29,6 @@ instance Ord StepOrdering where
 data World = World
   { regions :: Map RegionId Region
   , nations :: Map NationId Nation
-  } deriving Show
-
-data Region = Region
-  { population     :: Int
-  , industry       :: Int
-  , infrastructure :: Int
-  , devastation    :: Int
-  , happiness      :: Int
   } deriving Show
 
 data Nation = Nation
