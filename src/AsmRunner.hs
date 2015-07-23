@@ -39,14 +39,6 @@ class (Ord i) => AsmContext c i where
       updates :: [Update c i]
       updates = runASM c <$> asms ++ getInnerASMs c
 
-  stepInner :: c -> c
-  stepInner c = case combineUpdates updates of
-    Just u  -> applyUpdate c u
-    Nothing -> c
-    where
-      updates :: [Update c i]
-      updates = runASM c <$> getInnerASMs c
-
   getInnerASMs :: c -> [ASM c i]
   getInnerASMs _ = []
 

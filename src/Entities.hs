@@ -4,8 +4,6 @@ import           AsmRunner
 import Region
 import           Data.Map  as Map
 
-type RegionId = Int
-type NationId = Int
 type ArmyId = Int
 type WorldASM = ASM World StepOrdering
 

@@ -18,7 +18,7 @@ regionF rId i w = Update i (\w -> w {regions = insert rId newReg $ regions w} )
     reg :: Region
     reg = regions w ! rId
     newReg :: Region
-    newReg = reg {population = 0}
+    newReg = basicRegionStep reg
 
 -- run entire civilization (civil)
 civilF :: NationId -> StepOrdering -> World -> Update World StepOrdering
@@ -61,29 +61,53 @@ instance AsmContext World StepOrdering where
 
 regionT1 :: Region
 regionT1 = Region
-  { population     = 1000
-  , industry       = 5
-  , infrastructure = 10
-  , devastation    = 0
-  , happiness      = 10
+  { regionId        = 1
+  , ownerId         = 1
+  , allegiance      = 1
+  , ownershipDuration = 2140
+  , adjacentRegions = [2,3]
+  , population      = 26000
+  , industry        = 80
+  , infrastructure  = 90
+  , devastation     = 0
+  , happiness       = 85
+  , terrain         = Plain
+  , terrainFeatures = []
+  , ressources = Map.fromList [(Food, 28)]
   }
 
 regionT2 :: Region
 regionT2 = Region
-  { population     = 2900
-  , industry       = 29
-  , infrastructure = 50
-  , devastation    = 0
-  , happiness      = 8
+  { regionId        = 2
+  , ownerId         = 2
+  , allegiance      = 1
+  , ownershipDuration = 6
+  , adjacentRegions = [1,3]
+  , population      = 4000
+  , industry        = 20
+  , infrastructure  = 45
+  , devastation     = 5
+  , happiness       = 85
+  , terrain         = Plain
+  , terrainFeatures = []
+  , ressources = Map.fromList [(Food, 3)]
   }
 
 regionT3 :: Region
 regionT3 = Region
-  { population     = 650
-  , industry       = 0
-  , infrastructure = 2
-  , devastation    = 0
-  , happiness      = 0
+  { regionId        = 3
+  , ownerId         = 2
+  , allegiance      = 2
+  , ownershipDuration = 2100
+  , adjacentRegions = [1,2]
+  , population      = 21000
+  , industry        = 60
+  , infrastructure  = 60
+  , devastation     = 0
+  , happiness       = 95
+  , terrain         = Plain
+  , terrainFeatures = []
+  , ressources = Map.fromList [(Food, 22)]
   }
 
 armyT1 :: Army
